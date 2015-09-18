@@ -1,5 +1,5 @@
-
-int step = 360 / 12;
+int count = 12;
+int step = 360 / count;
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
@@ -8,10 +8,8 @@ void setup() {
 void drawBoxes(float startAngle, float m) {
   float val = (log(sin(radians(frameCount * m))));
   float opacity = (val + 1);
-  for (float i = startAngle; i < 360; i+=step) {
+  for (float i = startAngle; i <= startAngle + 360; i+=step) {
     pushMatrix();
-      // stroke(255, 255 * opacity);
-      // scale();
       stroke(lerpColor(color(255, 0, 0), color(0, 255, 0), (val + 1) / 2), 255 * opacity);
       rotate(radians(i));
       rotateX(cos(radians(frameCount * m)));
@@ -28,6 +26,7 @@ void drawBoxes(float startAngle, float m) {
 
 void draw() {
   float rad = radians(frameCount);
+  background(0);
   strokeWeight(1);
   noFill();
   pushMatrix();
@@ -35,7 +34,6 @@ void draw() {
     // rotate(rad);
     
     for (float x = 10; x < 40; x++) {
-      if (x % 20 == 0) background(0);
       drawBoxes(3 * x, x / 40);
     }
     
